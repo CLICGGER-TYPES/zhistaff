@@ -1,0 +1,9 @@
+{
+  "name": "zhizhang-mp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "知杖刷题小程序",
+  "devDependencies": {
+    "miniprogram-ci": "^2.1.42"
+  }
+}

@@ -1,0 +1,86 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  padding: 10rpx 0 20rpx;
+}
+.bank-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.picker {
+  flex: 1;
+  background: #fff;
+  border: 1rpx solid var(--border);
+  border-radius: 14rpx;
+  padding: 18rpx 20rpx;
+  font-size: 28rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.picker.small {
+  min-width: 220rpx;
+}
+
+.mode-cards {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+.mode-card {
+  flex: 1;
+  border: 3rpx solid var(--border);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.mode-card.active {
+  border-color: var(--primary);
+  background: #f0f6ff;
+}
+.mc-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.mc-desc {
+  font-size: 24rpx;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.setup-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin: 16rpx 0;
+  flex-wrap: wrap;
+}
+.label {
+  font-size: 28rpx;
+  color: var(--muted);
+  min-width: 120rpx;
+}
+.num-input {
+  width: 160rpx;
+  border: 1rpx solid var(--border);
+  border-radius: 14rpx;
+  padding: 16rpx;
+  font-size: 28rpx;
+  background: #fff;
+}
+.scope-info {
+  font-size: 26rpx;
+  color: var(--muted);
+}
+
+.setup-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  flex-wrap: wrap;
+}
+.diag-btn { margin-top: 30rpx; }

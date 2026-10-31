@@ -1,0 +1,66 @@
+/* 全局样式（移植自 H5 版） */
+page {
+  --bg: #f4f6f9;
+  --card: #fff;
+  --border: #e3e8ef;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --ok: #16a34a;
+  --bad: #dc2626;
+  --warn: #d97706;
+  --text: #1f2937;
+  --muted: #6b7280;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+}
+
+.container {
+  padding: 24rpx;
+}
+
+/* 卡片 */
+.card {
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin: 20rpx 0;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18rpx 30rpx;
+  border-radius: 14rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  line-height: 1.2;
+}
+.btn::after { border: none; }
+.btn.secondary { background: #eef2f7; color: var(--text); }
+.btn.success { background: var(--ok); }
+.btn.danger { background: var(--bad); }
+.btn.small { padding: 10rpx 20rpx; font-size: 26rpx; }
+.btn.disabled { opacity: .5; }
+
+.row { display: flex; align-items: center; }
+.between { justify-content: space-between; }
+.gap { gap: 16rpx; }
+.wrap { flex-wrap: wrap; }
+.muted { color: var(--muted); }
+.center { text-align: center; }
+
+.title { font-size: 36rpx; font-weight: 600; }
+.subtitle { font-size: 30rpx; font-weight: 600; margin-bottom: 20rpx; }
+
+.empty { text-align: center; color: var(--muted); padding: 80rpx 40rpx; }
+.empty .big { font-size: 80rpx; margin-bottom: 20rpx; }
+
+.hidden { display: none !important; }

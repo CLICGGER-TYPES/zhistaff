@@ -1,0 +1,81 @@
+<view class="container" wx:if="{{ready}}">
+  <view class="top-bar">
+    <button class="btn secondary small" bindtap="back">← 返回</button>
+    <button wx:if="{{tab==='fav' && favs.length}}" class="btn success small" bindtap="practiceFav">练习收藏</button>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-btn {{tab==='wrong'?'active':''}}" data-tab="wrong" bindtap="setTab">考试错题</view>
+    <view class="tab-btn {{tab==='fav'?'active':''}}" data-tab="fav" bindtap="setTab">手动收藏</view>
+  </view>
+
+  <!-- 考试错题 -->
+  <block wx:if="{{tab==='wrong'}}">
+    <block wx:if="{{sheet}}">
+      <view class="top-bar">
+        <button class="btn secondary small" bindtap="closeSheet">← 返回记录列表</button>
+        <button class="btn success small" data-ts="{{sheet.ts}}" bindtap="practiceRecordWrong">重刷这份错题</button>
+      </view>
+      <text class="subtitle">{{sheet.date}} · {{sheet.modeText}} · 对 {{sheet.correct}}/{{sheet.total}} 错 {{sheet.wrongN}}</text>
+      <view class="answer-sheet">
+        <view class="grid">
+          <view
+            wx:for="{{sheet.cells}}"
+            wx:key="num"
+            class="cell {{item.cls}}"
+            data-num="{{item.num}}"
+            bindtap="reviewCell"
+          >{{item.num}}</view>
+        </view>
+        <view class="legend">
+          <text><text class="dot ok"></text>答对</text>
+          <text><text class="dot bad"></text>答错</text>
+          <text><text class="dot na"></text>缺失</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view wx:if="{{!wronglog.length}}" class="empty">
+        <view class="big">🎉</view>
+        <text>还没有考试/练习记录，刷几题再来看错题。</text>
+      </view>
+      <block wx:else>
+        <text class="subtitle">考试错题（{{wronglog.length}} 次记录）</text>
+        <view
+          wx:for="{{wronglog}}"
+          wx:key="ts"
+          class="session-item"
+          data-ts="{{item.ts}}"
+          bindtap="openSession"
+        >
+          <view class="si-head">
+            <text><text class="b">{{item.date}}</text> · {{item.modeText}} · 对 {{item.correct}}/{{item.total}}</text>
+            <text class="bad-text">错 {{item.wrongN}} 题</text>
+          </view>
+          <text class="si-tip">点击查看答题卡</text>
+        </view>
+      </block>
+    </block>
+  </block>
+
+  <!-- 手动收藏 -->
+  <block wx:if="{{tab==='fav'}}">
+    <view wx:if="{{!favs.length}}" class="empty">
+      <view class="big">☆</view>
+      <text>还没有收藏的题，刷题时点右下角 ☆ 按钮即可收藏。</text>
+    </view>
+    <block wx:else>
+      <text class="subtitle">手动收藏（{{favs.length}} 题）</text>
+      <view
+        wx:for="{{favs}}"
+        wx:key="num"
+        class="fav-item"
+        data-num="{{item.num}}"
+        bindtap="reviewFav"
+      >
+        <view class="fi-head"><text class="b">#{{item.num}}</text><text wx:if="{{item.typeText}}" class="badge">{{item.typeText}}</text></view>
+        <text class="fi-text">{{item.text}}...</text>
+      </view>
+    </block>
+  </block>
+</view>

@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/quiz/quiz",
+    "pages/result/result",
+    "pages/wrongbook/wrongbook",
+    "pages/history/history"
+  ],
+  "window": {
+    "navigationBarTitleText": "知杖",
+    "navigationBarBackgroundColor": "#2563eb",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f6f9"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

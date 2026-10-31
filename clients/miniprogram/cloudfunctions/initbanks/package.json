@@ -1,0 +1,9 @@
+{
+  "name": "initbanks",
+  "version": "1.0.0",
+  "description": "upload bundled banks to cloud storage",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

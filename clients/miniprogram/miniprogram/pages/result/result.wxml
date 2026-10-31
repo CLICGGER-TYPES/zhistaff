@@ -1,0 +1,17 @@
+<view class="container" wx:if="{{ready}}">
+  <view class="result-box">
+    <text class="r-title">{{title}}</text>
+    <text class="score {{cls}}">{{correct}} / {{total}}</text>
+    <view class="result-stats">
+      <view class="stat"><text class="num">{{pct}}%</text><text class="lbl">正确率</text></view>
+      <view class="stat"><text class="num">{{wrong}}</text><text class="lbl">答错</text></view>
+      <view class="stat"><text class="num">{{timeText}}</text><text class="lbl">用时</text></view>
+    </view>
+  </view>
+  <view class="action-bar">
+    <button class="btn" bindtap="reRun">再来一次</button>
+    <button class="btn secondary" bindtap="goWrongBook">查看错题本</button>
+    <button class="btn secondary" bindtap="goHistory">历史成绩</button>
+    <button class="btn secondary" bindtap="back">返回</button>
+  </view>
+</view>

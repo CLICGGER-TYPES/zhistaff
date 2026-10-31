@@ -1,0 +1,33 @@
+# ---- 依赖 ----
+node_modules/
+package-manager-store/
+
+# ---- 密钥：绝不入库 ----
+.keys/
+*.key
+*.pem
+.env
+.env.*
+
+# ---- 题库：不随仓库分发（版权归新华三，仅本地持有）----
+# 注意：题库可能出现在任何子目录（bank/、cloudfunctions/*/banks/、android www/），一律排除
+*.bank
+source-pdf/*.pdf
+!bank/.gitkeep
+
+# ---- 构建产物 ----
+dist/
+build/
+**/app/build/
+**/android/build/
+www/
+
+# ---- 缓存 / 日志 ----
+*.log
+.DS_Store
+Thumbs.db
+
+# ---- 编辑器 ----
+.vscode/
+.idea/
+*.iml

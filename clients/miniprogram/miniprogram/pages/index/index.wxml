@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="header">
+    <text class="title">📚 知杖</text>
+    <view class="bank-row">
+      <picker mode="selector" range="{{bankNames}}" value="{{bankIndex}}" bindchange="onBankChange">
+        <view class="picker">{{banks[bankIndex].name || '选择题库'}}</view>
+      </picker>
+      <button class="btn small" bindtap="importBank">导入题库</button>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty">
+    <view class="big">📚</view>
+    <text>{{loadingText}}</text>
+  </view>
+
+  <view wx:elif="{{!hasBanks}}" class="empty">
+    <view class="big">📂</view>
+    <text>还没有题库，点击右上角「导入题库」选择 .bank 文件开始刷题。</text>
+    <button class="btn secondary small diag-btn" bindtap="uploadBanksToCloud">上传内置题库到云端（一次性）</button>
+    <button class="btn secondary small diag-btn" bindtap="diagnose">诊断云存储</button>
+  </view>
+
+  <block wx:else>
+    <view class="card">
+      <text class="subtitle">开始刷题</text>
+      <view class="mode-cards">
+        <view class="mode-card {{mode==='practice'?'active':''}}" data-mode="practice" bindtap="setMode">
+          <text class="mc-title">练习模式</text>
+          <text class="mc-desc">点「下一题」判对错，答错显示解析，适合学习</text>
+        </view>
+        <view class="mode-card {{mode==='exam'?'active':''}}" data-mode="exam" bindtap="setMode">
+          <text class="mc-title">模拟考试</text>
+          <text class="mc-desc">限时作答，交卷统一出成绩，不显示答案</text>
+        </view>
+      </view>
+
+      <view class="setup-row">
+        <text class="label">题目范围</text>
+        <picker mode="selector" range="{{scopeLabels}}" value="{{scopeIndex}}" bindchange="onScopeChange">
+          <view class="picker small">{{scopeLabels[scopeIndex]}}</view>
+        </picker>
+        <input wx:if="{{scope==='random'}}" type="number" class="num-input" value="{{randomCount}}" bindinput="onRandomCount" />
+        <text class="scope-info">{{scopeInfo}}</text>
+      </view>
+
+      <view wx:if="{{mode==='exam'}}" class="setup-row">
+        <text class="label">限时(分钟)</text>
+        <input type="number" class="num-input" value="{{examMinutes}}" bindinput="onExamMinutes" />
+      </view>
+
+      <view class="setup-actions">
+        <button class="btn" bindtap="startQuiz">开始刷题</button>
+        <button class="btn secondary" bindtap="goWrongBook">错题本</button>
+        <button class="btn secondary" bindtap="goHistory">历史成绩</button>
+      </view>
+    </view>
+  </block>
+</view>

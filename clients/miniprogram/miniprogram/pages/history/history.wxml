@@ -1,0 +1,69 @@
+<view class="container" wx:if="{{ready}}">
+  <view class="top-bar">
+    <button class="btn secondary small" bindtap="back">← 返回</button>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-btn {{tab==='records'?'active':''}}" data-tab="records" bindtap="setTab">成绩</view>
+    <view class="tab-btn {{tab==='stat'?'active':''}}" data-tab="stat" bindtap="setTab">统计</view>
+  </view>
+
+  <!-- 成绩 -->
+  <block wx:if="{{tab==='records'}}">
+    <view wx:if="{{!history.length}}" class="empty">
+      <view class="big">📊</view>
+      <text>还没有考试记录。</text>
+    </view>
+    <block wx:else>
+      <text class="subtitle">历史成绩</text>
+      <view class="history-table">
+        <view class="ht-row ht-head">
+          <text class="c1">时间</text>
+          <text class="c2">模式</text>
+          <text class="c3">成绩</text>
+          <text class="c4">正确率</text>
+          <text class="c5">用时</text>
+        </view>
+        <view wx:for="{{history}}" wx:key="ts" class="ht-row">
+          <text class="c1">{{item.date}}</text>
+          <text class="c2">{{item.modeText}}</text>
+          <text class="c3">{{item.scoreText}}</text>
+          <text class="c4">{{item.score}}%</text>
+          <text class="c5">{{item.time}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+
+  <!-- 统计 -->
+  <block wx:if="{{tab==='stat'}}">
+    <view wx:if="{{!hasData}}" class="empty">
+      <view class="big">📊</view>
+      <text>还没有做题数据，刷几题后这里会出现分析图表。</text>
+    </view>
+    <block wx:else>
+      <text class="subtitle">错题统计</text>
+      <view class="stat-box">
+        <text class="sb-title">每次正确率趋势</text>
+        <canvas type="2d" id="statLine" class="chart"></canvas>
+      </view>
+      <view class="stat-box">
+        <text class="sb-title">做题对错分布</text>
+        <canvas type="2d" id="statPie" class="chart"></canvas>
+      </view>
+      <view class="stat-box">
+        <text class="sb-title">出错率最高 TOP 10</text>
+        <canvas type="2d" id="statBar" class="chart"></canvas>
+      </view>
+
+      <text class="subtitle">出错排行 TOP 10</text>
+      <view wx:for="{{rankList}}" wx:key="num" class="rank-item">
+        <view class="ri-info">
+          <text class="b">#{{item.num}}</text> {{item.text}}
+          <text class="ri-meta">做 {{item.tries}} 次 · 错 {{item.wrong}} 次 · 对 {{item.tries - item.wrong}} 次</text>
+        </view>
+        <text class="ri-rate">{{item.rate}}%</text>
+      </view>
+    </block>
+  </block>
+</view>

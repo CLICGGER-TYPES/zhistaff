@@ -1,0 +1,50 @@
+<view class="container" wx:if="{{ready}}">
+  <view class="q-head">
+    <text class="q-num">{{qNumText}}</text>
+    <text wx:if="{{isExam}}" class="timer">⏱ {{timerText}}</text>
+    <text class="q-progress">{{isExam ? '考试中' : (isReview ? '回看' : '练习')}}</text>
+  </view>
+  <view class="progress-track"><view class="fill" style="width:{{progressPct}}%"></view></view>
+
+  <view class="card" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
+    <text class="q-text">{{qText}}</text>
+    <image wx:if="{{qImage}}" class="q-img" src="{{qImage}}" mode="widthFix" />
+    <view wx:if="{{qDesc}}" class="q-desc">📝 识图转述：{{qDesc}}</view>
+
+    <block wx:if="{{type==='choice'}}">
+      <view
+        wx:for="{{options}}"
+        wx:key="disp"
+        class="option {{item.cls}}"
+        data-disp="{{item.disp}}"
+        bindtap="onOptionTap"
+      >
+        <text class="opt-key">{{item.disp}}.</text>
+        <text class="opt-val">{{item.v}}</text>
+      </view>
+    </block>
+
+    <block wx:else>
+      <input class="fill-input" value="{{fillValue}}" bindinput="onFillInput" placeholder="请输入答案" />
+      <button wx:if="{{showJudgeBtn}}" class="btn small judge-btn" bindtap="judgeCurrent">判题</button>
+    </block>
+
+    <view wx:if="{{showExplain}}" class="explain">
+      <text class="explain-title">{{explainTitle}}</text>
+      <view class="explain-correct"><text class="b">正确答案：</text>{{correctText}}</view>
+      <view wx:if="{{explain}}" class="explain-detail"><text class="b">解析：</text>{{explain}}</view>
+    </view>
+  </view>
+
+  <view class="action-bar">
+    <button class="btn secondary" disabled="{{prevDisabled}}" bindtap="prev">上一题</button>
+    <button class="btn secondary" bindtap="clearAnswer">清除本题</button>
+    <button class="btn" bindtap="next">下一题</button>
+  </view>
+  <view class="action-bar center">
+    <button wx:if="{{showSubmit}}" class="btn danger" bindtap="submitQuiz">{{submitText}}</button>
+    <button class="btn secondary" bindtap="quit">退出</button>
+  </view>
+
+  <view class="fab {{isFav?'active':''}}" bindtap="toggleFav">{{isFav ? '★' : '☆'}}</view>
+</view>
